@@ -32,7 +32,7 @@ public class RafagaAliada {
     //CONSTRUCTORES
     public RafagaAliada(int alto) {
         //creamos el array. Inicialmente ningún disparo se almacena
-        listaDisparos = new ArrayList();
+        listaDisparos = new ArrayList<DisparoAliado>();
         altoPant = alto;
     }
 
