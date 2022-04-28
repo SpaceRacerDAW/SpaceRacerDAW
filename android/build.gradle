@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "29.0.0"
-    compileSdkVersion 29
+    buildToolsVersion "31.0.0"
+    compileSdkVersion 31
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -17,15 +17,15 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "es.iespablopicasso.spaceinvaders"
-        minSdkVersion 9
-        targetSdkVersion 29
+        applicationId "com.iespolitecnicomalaga.spaceracer"
+        minSdkVersion 14
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,7 +43,7 @@ task copyAndroidNatives {
         file("libs/x86_64/").mkdirs()
         file("libs/x86/").mkdirs()
 
-        configurations.natives.files.each { jar ->
+        configurations.natives.copy().files.each { jar ->
             def outputDir = null
             if (jar.name.endsWith("natives-arm64-v8a.jar")) outputDir = file("libs/arm64-v8a")
             if (jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
@@ -86,5 +86,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'es.iespablopicasso.spaceinvaders/es.iespablopicasso.spaceinvaders.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.iespolitecnicomalaga.spaceracer/com.iespolitecnicomalaga.spaceracer.AndroidLauncher'
 }
+
+eclipse.project.name = appName + "-android"

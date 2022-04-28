@@ -4,8 +4,8 @@ gwt {
     minHeapSize="1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
-    modules 'es.iespablopicasso.spaceinvaders.GdxDefinition'
-    devModules 'es.iespablopicasso.spaceinvaders.GdxDefinitionSuperdev'
+    modules 'es.iespolitecnicomalaga.spaceracer.GdxDefinition'
+    devModules 'es.iespolitecnicomalaga.spaceracer.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
     compiler {
