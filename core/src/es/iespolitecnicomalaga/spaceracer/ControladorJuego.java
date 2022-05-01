@@ -46,6 +46,11 @@ public class ControladorJuego {
     //Escenas
     protected EscenarioInicio escenaInicio;
 
+    //Musicas de inicio, de juego y de final de juego
+    protected Music introMusic;
+    protected Music gameMusic;
+    protected Music finalMusic;
+
     //ESTO ELIMINAR
     protected EscenarioInicio escenaJuego;
     protected EscenarioInicio escenaFinPartida;
@@ -72,13 +77,23 @@ public class ControladorJuego {
     /////////////////////////////////////////////////////////////////////////////////////
 
 
-    //El constructor creará a su vez: personajes iniciales y fondo
+    //El constructor creará a su vez: personajes iniciales, fondo y la música de la intro, la de mientras estamos jugando, y la de final de partida
     private ControladorJuego() {
 
         miLienzo = new LienzoAdaptador(new SpriteBatch());
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, PANTALLA_ANCHO, PANTALLA_ALTO);
+
+        introMusic = Gdx.audio.newMusic(Gdx.files.internal("musicaintro.mp3"));
+        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("musicajuego.mp3"));
+        finalMusic = Gdx.audio.newMusic(Gdx.files.internal("musicafinal.mp3"));
+
+        this.inicioMusicaIntro();
+        this.inicioMusicaJuego();
+        this.inicioMusicaFinal();
+
+
         escenaInicio = new EscenarioInicio(PANTALLA_ANCHO,PANTALLA_ALTO,miLienzo,camera);
 
         //ESTO ELIMINAR
@@ -135,6 +150,31 @@ public class ControladorJuego {
 
         //Importante, el control de los eventos de entrada, lo toma la escenaActiva en este momento
         Gdx.input.setInputProcessor(escenaActiva);
+    }
+
+    public void disposeMusic() {
+        introMusic.dispose();
+        gameMusic.dispose();
+        finalMusic.dispose();
+    }
+
+    private void inicioMusicaIntro(){
+        gameMusic.stop();
+        introMusic.setLooping(true);
+        introMusic.play();
+    }
+
+    private void inicioMusicaJuego() {
+        introMusic.stop();
+        gameMusic.setLooping(true);
+        gameMusic.setVolume(0.8f);
+        gameMusic.play();
+    }
+
+    private void inicioMusicaFinal() {
+        gameMusic.stop();
+        finalMusic.setLooping(true);
+        finalMusic.play();
     }
 }
 
