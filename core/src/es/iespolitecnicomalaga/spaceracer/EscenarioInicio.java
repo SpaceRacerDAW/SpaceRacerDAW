@@ -33,7 +33,7 @@ public class EscenarioInicio extends Escenario {
         //...
 
         //Y por último la música de este escenario
-        miMusica = Gdx.audio.newMusic(Gdx.files.internal("intro.ogg"));
+        miMusica = Gdx.audio.newMusic(Gdx.files.internal("musicaintro.mp3"));
         miMusica.setLooping(true);
         miMusica.play();
 
